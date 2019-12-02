@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Media;
 using UnityEngine;
 
 public class BallScript : MonoBehaviour
@@ -24,16 +25,18 @@ public class BallScript : MonoBehaviour
     public float timer;
 
     public float polybeat;
+
+    public AudioSource sound;
     // Start is called before the first frame update
     void Start()
     {
         Transform point1 = points[0];
         Transform point2 = points[1];
-        distance = Vector3.Distance(point1.transform.position, point2.transform.position) - margin*2.0f;
+        distance = Vector3.Distance(point1.transform.position, point2.transform.position);
         float b = 60.0f / bpm;
         float normalized_b = b * quaver;
         polybeat = normalized_b / polydivision;
-        speed = normalized_b * distance  / polydivision;
+        speed = distance / polybeat ;
     }
 
     // Update is called once per frame
@@ -42,22 +45,26 @@ public class BallScript : MonoBehaviour
         float max_cd = 0;
         Vector3 current_pos = transform.position;
 
-        Transform maxPoint = points[0];
-        
-        
+        Transform minPoint = points[0];
+
         for (int i = 0; i < points.Length; i++)
         {
+            
             float current_d = Vector3.Distance(current_pos, points[i].transform.localPosition);
 
+            if (current_d <= Vector3.Distance(current_pos, minPoint.transform.position))
+            {
+                minPoint = points[i];
+            }
+            
             if (current_d > max_cd)
             {
                 max_cd = current_d;
-                maxPoint = points[i];
             }
         }
         if (timer > polybeat)
         {
-            transform.position = maxPoint.transform.localPosition;
+            transform.position = minPoint.transform.localPosition;
             //Debug.Log(maxPoint.transform.localPosition);
             //Debug.Log(transform.position);
             timer -= polybeat;
@@ -70,6 +77,7 @@ public class BallScript : MonoBehaviour
             {
                 transform.rotation = new Quaternion(0,180,0,0);
             }
+            sound.Play();
             //Debug.Log(transform.position);
         }
         
@@ -78,7 +86,7 @@ public class BallScript : MonoBehaviour
         
         Debug.Log(transform.forward);
         
-        transform.position += Time.deltaTime * transform.forward * speed * 2;
+        transform.position += Time.deltaTime * transform.forward * speed;
         
         
         Debug.Log(transform.position);
