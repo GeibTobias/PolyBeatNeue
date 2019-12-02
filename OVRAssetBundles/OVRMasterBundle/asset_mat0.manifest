@@ -1,0 +1,45 @@
+ManifestFileVersion: 0
+CRC: 2280192058
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 0296c5d06a99ae435b295c20ae8f2573
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2164263bd948184a9373784f776f453a
+HashAppended: 0
+ClassTypes:
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+Assets:
+- Assets/Oculus/SampleFramework/Usage/SharedAssets/Materials/SportsBottle_metal.mat
+- Assets/Oculus/SampleFramework/Usage/SharedAssets/Materials/MAT_room_atlas_01.mat
+- Assets/Oculus/SampleFramework/Usage/SharedAssets/Materials/SoccerBlack.mat
+- Assets/Oculus/SampleFramework/Usage/DistanceGrab/Materials/SoccerWhiteWithOutline.mat
+- Assets/Oculus/SampleFramework/Usage/DistanceGrab/Materials/Ball10WithOutline.mat
+- Assets/Oculus/SampleFramework/Usage/SharedAssets/Materials/SoccerWhite.mat
+- Assets/Oculus/SampleFramework/Usage/DistanceGrab/GroundMaterial.mat
+- Assets/Oculus/SampleFramework/Usage/DistanceGrab/Materials/TriangleCursorTargeted.mat
+- Assets/Oculus/SampleFramework/Usage/SharedAssets/Materials/MAT_room_atlas_02.mat
+- Assets/Oculus/SampleFramework/Usage/DistanceGrab/Materials/Ball03WithOutline.mat
+- Assets/Oculus/SampleFramework/Usage/DistanceGrab/Materials/WoodBlockWithOutline.mat
+- Assets/Oculus/SampleFramework/Core/CustomHands/Materials/Hands_solid.mat
+- Assets/Oculus/SampleFramework/Usage/SharedAssets/Skyboxes/Sky_01/Skybox01.mat
+- Assets/Oculus/SampleFramework/Usage/SharedAssets/Materials/Ball10.mat
+- Assets/Oculus/SampleFramework/Usage/DistanceGrab/Materials/ToyCubeWithOutline.mat
+- Assets/Oculus/SampleFramework/Core/CustomHands/Models/HandMaterial.mat
+- Assets/Oculus/SampleFramework/Usage/SharedAssets/Materials/SportsBottle_lid.mat
+- Assets/Oculus/SampleFramework/Usage/DistanceGrab/Materials/SoccerBlackWithOutline.mat
+- Assets/Oculus/SampleFramework/Usage/SharedAssets/Materials/ToyCubeMat.mat
+- Assets/Oculus/SampleFramework/Usage/DistanceGrab/Materials/TriangleCursorUntargeted.mat
+- Assets/Oculus/SampleFramework/Usage/SharedAssets/Materials/Ball03.mat
+- Assets/Oculus/SampleFramework/Usage/DistanceGrab/Materials/SportsBottleLidWithOutline.mat
+- Assets/Oculus/SampleFramework/Usage/DistanceGrab/Materials/SportsBottleMetalWithOutline.mat
+Dependencies:
+- C:/Users/Tobias Geib/Documents/Duell_Projekt/new vr test/OVRAssetBundles/OVRMasterBundle/asset_png0
+- C:/Users/Tobias Geib/Documents/Duell_Projekt/new vr test/OVRAssetBundles/OVRMasterBundle/asset_jpg0
+- C:/Users/Tobias Geib/Documents/Duell_Projekt/new vr test/OVRAssetBundles/OVRMasterBundle/asset_shader0

@@ -1,0 +1,21 @@
+ManifestFileVersion: 0
+CRC: 2095669683
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 51ab4d0334d9c94de99f7a67147dda7f
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: fdf6c57a251b9f6ec27bdd2fe01b033c
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+Assets:
+- Assets/Oculus/SampleFramework/Core/CustomHands/Models/RightHandAnimator.controller
+- Assets/Oculus/SampleFramework/Core/CustomHands/Models/LeftHandAnimator.controller
+Dependencies:
+- C:/Users/Tobias Geib/Documents/Duell_Projekt/new vr test/OVRAssetBundles/OVRMasterBundle/asset_fbx0
+- C:/Users/Tobias Geib/Documents/Duell_Projekt/new vr test/OVRAssetBundles/OVRMasterBundle/asset_fbx1

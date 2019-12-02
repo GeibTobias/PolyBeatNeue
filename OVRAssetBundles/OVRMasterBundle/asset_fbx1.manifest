@@ -1,0 +1,37 @@
+ManifestFileVersion: 0
+CRC: 4097820346
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: e47a4f794b37c2faa82ba3a43629eb97
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 1a3454a22555854a486eb99ddeb551fb
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 90
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+Assets:
+- Assets/Oculus/SampleFramework/Usage/SharedAssets/Models/light_01.fbx
+- Assets/Oculus/SampleFramework/Core/CustomHands/Animations/l_hand_hold_generic_anim.fbx
+- Assets/Oculus/SampleFramework/Core/CustomHands/Animations/l_hand_cap_touch_thumb_mask_anim.fbx
+- Assets/Oculus/SampleFramework/Core/CustomHands/Animations/r_hand_fist_anim.fbx
+- Assets/Oculus/SampleFramework/Core/CustomHands/Animations/l_hand_pinch_anim.fbx
+Dependencies:
+- C:/Users/Tobias Geib/Documents/Duell_Projekt/new vr test/OVRAssetBundles/OVRMasterBundle/asset_mat0
