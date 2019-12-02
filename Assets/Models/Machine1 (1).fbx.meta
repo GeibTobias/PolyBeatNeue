@@ -3,7 +3,33 @@ guid: a14cb7fe59f249f43a01793d5d59db0a
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Black
+    second: {fileID: -1580535799172915004, guid: a14cb7fe59f249f43a01793d5d59db0a,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Borders
+    second: {fileID: 2100000, guid: f5f7d5be99c39df4b879a1b21a5fe01b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: a4594e071898a8e4391b50fa448892b0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Monitor
+    second: {fileID: 2100000, guid: 0c8b89761ef57f7429699a5c9795ff1d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ShootingLight
+    second: {fileID: 2100000, guid: 76ec10cfda70ba0458286e669762b8b6, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
