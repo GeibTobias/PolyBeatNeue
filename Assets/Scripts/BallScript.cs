@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Media;
 using UnityEngine;
 
 public class BallScript : MonoBehaviour
@@ -31,6 +30,8 @@ public class BallScript : MonoBehaviour
     public AudioSource sound;
 
     public MusicScript music;
+
+    public HighscoreScript score;
     // Start is called before the first frame update
     void Start()
     {
@@ -90,6 +91,9 @@ public class BallScript : MonoBehaviour
             {
                 music.startMusic();
             }
+            
+            score.SetHittable();
+            
             //Debug.Log(transform.position);
         }
         

@@ -8,6 +8,8 @@ public class BoxingScript : MonoBehaviour
     public LayerMask layer;
 
     public GameObject beatunit;
+
+    public HighscoreScript score;
     
     private Vector3 previousPos;
 
@@ -27,7 +29,7 @@ public class BoxingScript : MonoBehaviour
             float percentage = hit.transform.gameObject.GetComponent<BallScript>().percentage;
 
             
-            HighscoreScript.AddScore(percentage);
+            score.AddScore(percentage);
 
             //Debug.Log(beatunit.transform.forward);
         }

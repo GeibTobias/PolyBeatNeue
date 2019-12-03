@@ -10,17 +10,28 @@ public class HighscoreScript : MonoBehaviour
 
     public Text thisText;
 
-    private static float totalScore;
+    private float totalScore;
+    private bool hittable = true;
     void Start()
     {
         thisText = GetComponent<Text>();
         totalScore = 0;
     }
 
-    public static void AddScore(float score)
+    public void AddScore(float score)
     {
-        float round_score = Mathf.Floor(score * 100.0f);
-        totalScore += round_score;
+        if (hittable)
+        {
+            float round_score = Mathf.Floor(score * 100.0f);
+            totalScore += round_score;
+        }
+        hittable = false;
+
+    }
+
+    public void SetHittable()
+    {
+        hittable = true;
     }
     // Update is called once per frame
     void Update()
