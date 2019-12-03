@@ -26,7 +26,11 @@ public class BallScript : MonoBehaviour
 
     public float polybeat;
 
+    public CountScript counter;
+
     public AudioSource sound;
+
+    public MusicScript music;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +41,7 @@ public class BallScript : MonoBehaviour
         float normalized_b = b * quaver;
         polybeat = normalized_b / polydivision;
         speed = distance / polybeat ;
+        //music.startMusic();
     }
 
     // Update is called once per frame
@@ -68,7 +73,7 @@ public class BallScript : MonoBehaviour
             //Debug.Log(maxPoint.transform.localPosition);
             //Debug.Log(transform.position);
             timer -= polybeat;
-            Debug.Log(transform.rotation.y);
+            //Debug.Log(transform.rotation.y);
             if (transform.rotation.y > 0)
             {
                 transform.rotation = new Quaternion(0,0,0,0);
@@ -78,18 +83,25 @@ public class BallScript : MonoBehaviour
                 transform.rotation = new Quaternion(0,180,0,0);
             }
             sound.Play();
+
+            counter.AddCount();
+
+            if (counter.getCount() == 1)
+            {
+                music.startMusic();
+            }
             //Debug.Log(transform.position);
         }
         
         
         percentage = max_cd /distance;
         
-        Debug.Log(transform.forward);
+        //Debug.Log(transform.forward);
         
         transform.position += Time.deltaTime * transform.forward * speed;
         
         
-        Debug.Log(transform.position);
+        //Debug.Log(transform.position);
         
         timer += Time.deltaTime;
     }

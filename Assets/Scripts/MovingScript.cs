@@ -22,14 +22,14 @@ public class MovingScript : MonoBehaviour
         GameObject player2 = GameObject.Find("CatchWall");
         
         distance = Vector3.Distance(player1.transform.position, player2.transform.position) -0.8f;
-        Debug.Log(distance);
+        //Debug.Log(distance);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(distance);
-        Debug.Log(polyBeat);
+        //Debug.Log(distance);
+        //Debug.Log(polyBeat);
         transform.position += Time.deltaTime * transform.forward * distance / polyBeat;
         //Debug.Log(transform.forward);
     }
