@@ -12,6 +12,7 @@ public class PolyManagerScript : MonoBehaviour
 
     public AudioSource audioLeft;
     public AudioSource audioRight;
+    public AudioSource music;
     
     private GameObject bbBlue;
     private GameObject bbRed;
@@ -28,6 +29,15 @@ public class PolyManagerScript : MonoBehaviour
     private ProgScript psBlue;
     private ProgScript psRed;
 
+    private GameObject gloveL;
+    private GameObject gloveR;
+
+    public Material gloveLMat;
+    public Material gloveRMat;
+
+    public Material gloveLSelect;
+    public Material gloveRSelect;
+    
     private float prevPolyL;
     private float prevPolyR;
     private float prevBpm;
@@ -43,9 +53,8 @@ public class PolyManagerScript : MonoBehaviour
 
     private int counterL;
     private int counterR;
-    
-    
-    public 
+
+    private float adjustTimer;
     // Start is called before the first frame update
     void Start()
     {
@@ -67,6 +76,9 @@ public class PolyManagerScript : MonoBehaviour
         psBlue = progIndBlue.GetComponent<ProgScript>();
         psRed = progIndRed.GetComponent<ProgScript>();
 
+        gloveL = GameObject.Find("Glove_L");
+        gloveR = GameObject.Find("Glove_R");
+        
         prevPolyL = polyL;
         prevPolyL = polyR;
         prevBpm = bpm;
@@ -82,6 +94,8 @@ public class PolyManagerScript : MonoBehaviour
 
         playerHasTriggerL = false;
         playerHasTriggerR = false;
+
+        adjustTimer = 1;
         
         updateGameState();
     }
@@ -89,9 +103,28 @@ public class PolyManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
+
+        if (!playerHasTriggerL)
+        {
+            gloveL.GetComponent<Renderer>().material = gloveLSelect;
+        }
+        else
+        {
+            gloveL.GetComponent<Renderer>().material = gloveLMat;
+        }
+        
+        if (!playerHasTriggerR)
+        {
+            gloveR.GetComponent<Renderer>().material = gloveRSelect;
+        }
+        else
+        {
+            gloveR.GetComponent<Renderer>().material = gloveRMat;
+        }
+        
         OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.LTouch);
-    
+        OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
+
         if (!playerHasTriggerL & OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger) > 0.5f)
         {
             onTriggerLeft();
@@ -102,6 +135,14 @@ public class PolyManagerScript : MonoBehaviour
             onTriggerRight();
         }
 
+        if (timerR > polyRTime & timerL > polyLTime & polyL == 4 & polyR == 3)
+        {
+            if (!music.isPlaying)
+            {
+                music.Play();
+            }
+        } 
+        
         if (timerL > polyLTime)
         {
             counterL = (counterL + 1) % 2;
@@ -139,6 +180,19 @@ public class PolyManagerScript : MonoBehaviour
             bsRed.onTimer(false);
             timerR -= polyRTime;
         }
+
+        
+
+        if (adjustTimer == 0 & OVRInput.Get(OVRInput.Button.PrimaryThumbstickUp))
+        {
+            adjustLeft(OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).x);
+        }
+        
+        
+        if (adjustTimer == 0 & OVRInput.Get(OVRInput.Button.SecondaryThumbstickUp))
+        {
+            adjustRight(OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick).x);
+        }
         
         if (checkChanged())
         {
@@ -156,10 +210,13 @@ public class PolyManagerScript : MonoBehaviour
         
         timerL += Time.deltaTime;
         timerR += Time.deltaTime;
+        adjustTimer = Mathf.Max(0, adjustTimer - Time.deltaTime);
     }
 
     private void updateGameState()
     {
+        music.Stop();
+        
         bsBlue.updateGameState(polyL,bpm);
         bsRed.updateGameState(polyR,bpm);
 
@@ -169,6 +226,7 @@ public class PolyManagerScript : MonoBehaviour
         psBlue.updateGameState(polyL);
         psRed.updateGameState(polyR);
 
+        
     }
 
     private bool checkChanged()
@@ -207,7 +265,7 @@ public class PolyManagerScript : MonoBehaviour
         audioLeft.Play();
         csBlue.AddCount();
         psBlue.onTrigger();
-        OVRInput.SetControllerVibration(1, 0.5f, OVRInput.Controller.LTouch);
+        OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.LTouch);
 
         playerHasTriggerL = true;
     }
@@ -218,8 +276,38 @@ public class PolyManagerScript : MonoBehaviour
         audioRight.Play();
         csRed.AddCount();
         psRed.onTrigger();
-        OVRInput.SetControllerVibration(1, 0.5f, OVRInput.Controller.RTouch);
+        OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.RTouch);
 
         playerHasTriggerR = true;
+    }
+
+    private void adjustLeft(float input)
+    {
+        if (input >= 0.5)
+        {
+            polyL += 1;
+            adjustTimer += 1;
+        }
+        
+        if (input <= -0.5)
+        {
+            polyL = Mathf.Max(2, polyL - 1);
+            adjustTimer += 1;
+        }
+    }
+    
+    private void adjustRight(float input)
+    {
+        if (input >= 0.5)
+        {
+            polyR += 1;
+            adjustTimer += 1;
+        }
+        
+        if (input <= -0.5)
+        {
+            polyR = Mathf.Max(2, polyR - 1);
+            adjustTimer += 1;
+        }
     }
 }
