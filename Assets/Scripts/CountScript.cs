@@ -10,11 +10,13 @@ public class CountScript : MonoBehaviour
 
     public float poly;
     
+    
     private float count;
     void Start()
     {
         thisText = GetComponent<Text>();
         count = 0;
+
     }
 
     public void AddCount()
@@ -31,5 +33,11 @@ public class CountScript : MonoBehaviour
     void Update()
     {
         thisText.text = "" + (count+1);
+    }
+
+    public void updateGameState(float gsPoly)
+    {
+        count = 0;
+        poly = gsPoly;
     }
 }

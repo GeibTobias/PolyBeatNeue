@@ -32,9 +32,12 @@ public class BallScript : MonoBehaviour
     public MusicScript music;
 
     public HighscoreScript score;
+    
+    
     // Start is called before the first frame update
     void Start()
     {
+
         Transform point1 = points[0];
         Transform point2 = points[1];
         distance = Vector3.Distance(point1.transform.position, point2.transform.position);
@@ -68,36 +71,7 @@ public class BallScript : MonoBehaviour
                 max_cd = current_d;
             }
         }
-        if (timer > polybeat)
-        {
-            transform.position = minPoint.transform.localPosition;
-            //Debug.Log(maxPoint.transform.localPosition);
-            //Debug.Log(transform.position);
-            timer -= polybeat;
-            //Debug.Log(transform.rotation.y);
-            if (transform.rotation.y > 0)
-            {
-                transform.rotation = new Quaternion(0,0,0,0);
-            }
-            else
-            {
-                transform.rotation = new Quaternion(0,180,0,0);
-            }
-            sound.Play();
 
-            counter.AddCount();
-
-            if (counter.getCount() == 1)
-            {
-                music.startMusic();
-            }
-            
-            score.SetHittable();
-            
-            //Debug.Log(transform.position);
-        }
-        
-        
         percentage = max_cd /distance;
         
         //Debug.Log(transform.forward);
@@ -108,5 +82,67 @@ public class BallScript : MonoBehaviour
         //Debug.Log(transform.position);
         
         timer += Time.deltaTime;
+    }
+
+    public void updateGameState(float gsPoly, float gsBpm)
+    {
+        polydivision = gsPoly;
+        bpm = gsBpm;
+        
+        float b = 60.0f / bpm;
+        float normalized_b = b * quaver;
+        polybeat = normalized_b / polydivision;
+        speed = distance / polybeat ;
+        onTimer(true);
+    }
+
+    public void onTimer(bool reset)
+    {
+        
+        
+        Transform minPoint = points[0];
+
+        if (!reset)
+        {
+            for (int i = 0; i < points.Length; i++)
+            {
+                Vector3 current_pos = transform.position;
+
+                float current_d = Vector3.Distance(current_pos, points[i].transform.localPosition);
+
+                if (current_d <= Vector3.Distance(current_pos, minPoint.transform.position))
+                {
+                    minPoint = points[i];
+                }
+            }
+        }
+
+        transform.position = minPoint.transform.localPosition;
+        //Debug.Log(maxPoint.transform.localPosition);
+        //Debug.Log(transform.position);
+        timer -= polybeat;
+        //Debug.Log(transform.rotation.y);
+        if (transform.rotation.y > 0  | reset)
+        {
+            transform.rotation = new Quaternion(0,0,0,0);
+        }
+        else
+        {
+            transform.rotation = new Quaternion(0,180,0,0);
+        }
+
+        
+            
+        
+        //sound.Play();
+
+        //counter.AddCount();
+
+        //if (counter.getCount() == 1)
+        //{
+        //    music.startMusic();
+        //}
+            
+        score.SetHittable();
     }
 }
