@@ -18,6 +18,8 @@ public class ManagerScript : MonoBehaviour
     public float polySecondary;
 
     public bool rotate;
+
+    public List<GameObject> slitList;
     
     // Start is called before the first frame update
     void Start()
@@ -60,6 +62,17 @@ public class ManagerScript : MonoBehaviour
             primBScript.updateManager(bpm, polyPrimary);
             secBScript.updateManager(bpm, polySecondary);
         }
+
+        bool hasCollision = false;
+        foreach (GameObject s in slitList)
+        {
+            SlitScript slitScript = s.GetComponent<SlitScript>();
+            if (slitScript.checkCollision())
+            {
+                hasCollision = true;
+            }
+        }
+        rotate = !hasCollision;
     }
     
 }
