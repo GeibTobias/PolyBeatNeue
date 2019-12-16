@@ -15,8 +15,6 @@ public class BarrelScript : MonoBehaviour
 
     public bool rotate;
 
-    public float timer;
-
     public float speed;
 
     public AudioSource audio;
@@ -48,19 +46,11 @@ public class BarrelScript : MonoBehaviour
             speed = managerScript.calcSpeed(bpm, poly);
         
             Barrel.transform.Rotate (Barrel.transform.up, Time.deltaTime * (180  / speed), Space.World);
-            timer += Time.deltaTime;
-            if (timer > speed)
-            {
-                onTrigger();
-            }
         }
     }
 
-    void onTrigger()
+    public void onTrigger()
     {
-        timer = Mathf.Max(0,timer -speed);
-
-
         if (distance < 1)
         {
             
