@@ -17,8 +17,6 @@ public class BarrelScript : MonoBehaviour
 
     public float speed;
 
-    public AudioSource audio;
-
     public float bpm;
 
     public float distance;
@@ -62,7 +60,6 @@ public class BarrelScript : MonoBehaviour
             Barrel.transform.up = UpVector3;
             Barrel.transform.Rotate (Barrel.transform.up, 90, Space.World);
         }
-        audio.Play();
     }
 
 

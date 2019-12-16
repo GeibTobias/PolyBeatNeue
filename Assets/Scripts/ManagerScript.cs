@@ -26,6 +26,10 @@ public class ManagerScript : MonoBehaviour
     public float primTimer;
     public float secTimer;
     
+    
+    public AudioSource audioprime;
+    public AudioSource audiosec;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -48,28 +52,33 @@ public class ManagerScript : MonoBehaviour
         float primSpeed = calcSpeed(bpm, polyPrimary);
         float secSpeed = calcSpeed(bpm, polySecondary);
 
-        if (primTimer >= primSpeed )
+        if (rotate)
         {
-            primBScript.onTrigger();
-            primIManager.onTrigger();
-            primTimer -= primSpeed;
+            if (primTimer >= primSpeed)
+            {
+                primBScript.onTrigger();
+                primIManager.onTrigger();
+                audioprime.Play();
+                primTimer -= primSpeed;
+            }
+
+            if (secTimer >= secSpeed)
+            {
+                secBScript.onTrigger();
+                secIManager.onTrigger();
+                audiosec.Play();
+                secTimer -= secSpeed;
+            }
+
+            primTimer += Time.deltaTime;
+            secTimer += Time.deltaTime;
         }
 
-        if (secTimer >= secSpeed)
-        {
-            secBScript.onTrigger();
-            secIManager.onTrigger();
-            secTimer -= secSpeed;
-        }
-        
         primBScript.rotate = rotate;
         secBScript.rotate = rotate;
         primIManager.rotate = rotate;
         secIManager.rotate = rotate;
 
-        primTimer += Time.deltaTime;
-        secTimer += Time.deltaTime;
-        
         updateManager();
     }
 
@@ -88,9 +97,11 @@ public class ManagerScript : MonoBehaviour
         float sbpm = secBScript.bpm;
         if (pp != polyPrimary | sp != polySecondary | pbpm != bpm | sbpm != bpm)
         {
+            primTimer = 0;
             primBScript.updateManager(bpm, polyPrimary);
             primIManager.updateManager(bpm, polyPrimary);
-            
+
+            secTimer = 0;
             secBScript.updateManager(bpm, polySecondary);
             secIManager.updateManager(bpm, polySecondary);
 
