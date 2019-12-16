@@ -23,7 +23,6 @@ public class MeteorScript : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager");
-        shield = GameObject.Find("Shield");
         shieldScript = shield.GetComponent<ShieldScript>();
         transform.position = (transform.position - center.position).normalized * radius + center.position;
     }
