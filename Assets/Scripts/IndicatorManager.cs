@@ -13,7 +13,7 @@ public class IndicatorManager : MonoBehaviour
     public float speed;
 
     public FloorIndicatorScript fiScript;
-
+    public ProgIndScript progIndScript;
     public bool rotate;
     
     // Start is called before the first frame update
@@ -38,11 +38,13 @@ public class IndicatorManager : MonoBehaviour
 
         fiScript.speed = speed;
         fiScript.onTrigger();
+        progIndScript.onUpdate();
     }
 
     public void onTrigger()
     {
         fiScript.onTrigger();
+        progIndScript.onTrigger();
     }
     
     private float calcSpeed(float bpm, float poly)

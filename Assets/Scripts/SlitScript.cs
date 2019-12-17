@@ -12,6 +12,16 @@ public class SlitScript : MonoBehaviour
     public GameObject gameManager;
 
     public ManagerScript managerScript;
+
+    public bool isPrime;
+    
+    
+    public Material standardMaterial;
+
+    public Material tutorialMaterial;
+
+    public bool tutorial;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +50,23 @@ public class SlitScript : MonoBehaviour
         else
         {
             return false;
+        }
+    }
+    
+    public void setTutorial(bool tutorial)
+    {
+        if (this.tutorial != tutorial)
+        {
+            this.tutorial = tutorial;
+            if (tutorial)
+            {
+                GetComponent<Renderer>().material = tutorialMaterial;
+            }
+            else
+            {
+                GetComponent<Renderer>().material = standardMaterial;
+            }
+
         }
     }
     

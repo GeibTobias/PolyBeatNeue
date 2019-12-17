@@ -29,6 +29,30 @@ public class ManagerScript : MonoBehaviour
     
     public AudioSource audioprime;
     public AudioSource audiosec;
+
+    public LevelManagerScript levelmanager;
+
+    public bool isTutorial;
+
+    public int primCounter;
+    public int secCounter;
+
+    public int cycleCounter;
+
+    public AudioSource currentMusic;
+
+    public float synctimer;
+    public bool started;
+
+    public bool musicIsPlaying;
+    public bool musicstarted;
+
+    public SlitScript primeslitfront;
+    public SlitScript primeslitback;
+    public SlitScript secslitfront;
+    public SlitScript secslitback;
+
+    public bool hasVibrated;
     
     // Start is called before the first frame update
     void Start()
@@ -41,6 +65,10 @@ public class ManagerScript : MonoBehaviour
         //secBScript.updateManager(bpm, polySecondary);
         primBScript.UpVector3 = Vector3.forward;
         secBScript.UpVector3 = Vector3.back;
+        primCounter = 1;
+        secCounter = 1;
+        started = false;
+        musicIsPlaying = false;
 
 
 
@@ -49,17 +77,68 @@ public class ManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        primeslitfront.setTutorial(isTutorial);
+        primeslitback.setTutorial(isTutorial);
+        secslitfront.setTutorial(isTutorial);
+        secslitback.setTutorial(isTutorial);
+        
+        
+        OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.LTouch);
+        OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
+        
+        started = synctimer >= 1;
+        currentMusic = levelmanager.getCurrentLevel().levelMusic;
+        isTutorial = !levelmanager.getCurrentLevel().tutorialfinished;
+        polyPrimary = levelmanager.getCurrentLevel().polyprim;
+        polySecondary = levelmanager.getCurrentLevel().polysec;
+        
         float primSpeed = calcSpeed(bpm, polyPrimary);
         float secSpeed = calcSpeed(bpm, polySecondary);
 
+        
+        if (cycleCounter == 0 & started)
+        {
+            if (!musicstarted)
+            {
+                currentMusic.Play();
+                musicstarted = true;
+                musicIsPlaying = true;
+            }
+        }
+        
         if (rotate)
         {
+            primTimer += Time.deltaTime;
+            secTimer += Time.deltaTime;
             if (primTimer >= primSpeed)
             {
                 primBScript.onTrigger();
                 primIManager.onTrigger();
                 audioprime.Play();
-                primTimer -= primSpeed;
+                primTimer = Mathf.Max(primTimer - primSpeed, 0);
+                primCounter = primCounter + 1;
+                if (primCounter > polyPrimary)
+                {
+                    primCounter = 1;
+                    cycleCounter += 1;
+                    if (cycleCounter == 8)
+                    {
+                        cycleCounter = 0;
+                        if (isTutorial)
+                        {
+                            levelmanager.getCurrentLevel().tutorialfinished = true;
+                        }
+                        else
+                        {
+                            levelmanager.nextLevel();
+                            currentMusic.Stop();
+                            musicIsPlaying = false;
+                            musicstarted = false;
+
+                        }
+                    }
+                }
             }
 
             if (secTimer >= secSpeed)
@@ -67,11 +146,10 @@ public class ManagerScript : MonoBehaviour
                 secBScript.onTrigger();
                 secIManager.onTrigger();
                 audiosec.Play();
-                secTimer -= secSpeed;
+                secTimer = Mathf.Max(secTimer - secSpeed, 0);
+                secCounter = ((secCounter) % Mathf.FloorToInt(polySecondary)) + 1;
             }
 
-            primTimer += Time.deltaTime;
-            secTimer += Time.deltaTime;
         }
 
         primBScript.rotate = rotate;
@@ -80,6 +158,7 @@ public class ManagerScript : MonoBehaviour
         secIManager.rotate = rotate;
 
         updateManager();
+        synctimer = Mathf.Min(synctimer + Time.deltaTime, 2.0f);
     }
 
     
@@ -111,12 +190,48 @@ public class ManagerScript : MonoBehaviour
         foreach (GameObject s in slitList)
         {
             SlitScript slitScript = s.GetComponent<SlitScript>();
-            if (slitScript.checkCollision())
+            if (!isTutorial & slitScript.checkCollision())
             {
                 hasCollision = true;
+                if (musicIsPlaying)
+                {
+                    Debug.Log("Pause");
+                    currentMusic.Pause();
+                    musicIsPlaying = false;
+                }
+                if (slitScript.isPrime)
+                {
+                    if (!hasVibrated)
+                    {
+                        OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.RTouch);
+                        hasVibrated = true;    
+                    }
+                }
+                else 
+                {
+                    if (!hasVibrated)
+                    {
+                        OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.LTouch);
+                        hasVibrated = true;
+                    }
+                }
             }
+            
         }
-        rotate = !hasCollision;
+
+        if (!hasCollision)
+        {
+            if (!musicIsPlaying)
+            {
+                Debug.Log("Unpause");
+                currentMusic.UnPause();
+                musicIsPlaying = true;
+            }
+
+            hasVibrated = false;
+        }
+        rotate = !hasCollision & started;
+        
     }
     
 }
