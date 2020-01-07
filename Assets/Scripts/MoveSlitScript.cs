@@ -5,12 +5,11 @@ using UnityEngine;
 public class MoveSlitScript : MonoBehaviour
 {
 
-    public GameObject hand;
 
-    public GameObject head;
-    
-    public float minDistance;
-    public float maxDistance;
+    public Transform minpoint;
+    public Transform maxpoint;
+
+    public GameObject hand;
 
     
     // Start is called before the first frame update
@@ -21,10 +20,30 @@ public class MoveSlitScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float dist;
+
+        float hpos = hand.transform.position.z;
+
+        float minz = minpoint.position.z;
+        float maxz= maxpoint.position.z;
         
-        float adjustZpos = Mathf.Min(Mathf.Max(Vector3.Distance(hand.transform.position, head.transform.position ) * 25 -1.25f ,minDistance), maxDistance);
-        transform.position= new Vector3(transform.position.x,transform.position.y,adjustZpos);
+        if (hpos < minz)
+        {
+            dist = 0;
+        }
+        else if(hpos > maxz)
+        {
+            dist = 1;
+        }
+        else
+        {
+            dist = Mathf.Abs(hpos - minz) / Mathf.Abs(minz - maxz);
+        }
+        
+        //float adjustZpos = calcPos(contCube.transform.localPosition);
+        transform.localPosition= new Vector3(transform.localPosition.x,transform.localPosition.y,dist);
     }
 
+    
  
 }
