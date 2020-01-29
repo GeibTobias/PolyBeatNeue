@@ -27,8 +27,9 @@ public class TrackScript : MonoBehaviour
         if (SongTiming.hasStarted())
         {
             enemy_pos += Time.deltaTime;
+            transform.position = Vector3.Lerp(startPoint.position, endPoint.position, enemy_pos/100);
+
         }
 
-        transform.position = Vector3.Lerp(startPoint.position, endPoint.position, enemy_pos/100);
     }
 }
