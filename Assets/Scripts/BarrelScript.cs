@@ -10,14 +10,14 @@ public class BarrelScript : MonoBehaviour
 
     public GameObject Manager;
     public GameObject Barrel;
-    public float poly;
+    // public float poly;
     public ManagerScript managerScript;
 
     public bool rotate;
 
     public float speed;
 
-    public float bpm;
+    //public float bpm;
 
     public float distance;
 
@@ -34,6 +34,7 @@ public class BarrelScript : MonoBehaviour
     }
 
     // Update is called once per frame
+    // change to Lerp
     void Update()
     {
         //worldY = Barrel.transform.forward.y; 
@@ -41,7 +42,7 @@ public class BarrelScript : MonoBehaviour
         distance = Vector3.Distance(Vector3.left, forward);
         if (rotate)
         {
-            speed = managerScript.calcSpeed(bpm, poly);
+            //speed = managerScript.calcSpeed(bpm, poly);
         
             Barrel.transform.Rotate (Barrel.transform.up, Time.deltaTime * (180  / speed), Space.World);
         }
@@ -63,13 +64,9 @@ public class BarrelScript : MonoBehaviour
     }
 
 
-    public void updateManager(float bpm, float poly)
+    public void updateManager(float speed)
     {
-        if (this.poly != poly | this.bpm != bpm)
-        {
-            this.poly = poly;
-            this.bpm = bpm;
-        }
+        this.speed = speed;
         onTrigger();
     }
     
