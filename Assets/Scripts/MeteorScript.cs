@@ -30,12 +30,14 @@ public class MeteorScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         meteorMove();
         float rand = Random.value*100;
         if (rand >= (101 - probability) - 1)
         {
              meteorRain();   
         }
+        +/
     }
 
     void meteorRain()
@@ -56,5 +58,7 @@ public class MeteorScript : MonoBehaviour
         transform.RotateAround (center.position, axis, rotationSpeed * Time.deltaTime);
         var desiredPosition = (transform.position - center.position).normalized * radius + center.position;
         transform.position = Vector3.MoveTowards(transform.position, desiredPosition, Time.deltaTime * radiusSpeed);
+    */
     }
+    
 }

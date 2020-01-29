@@ -11,7 +11,10 @@ public class BeatUnitScript : MonoBehaviour
     public Transform endpoint;
 
     public ManagerScript manager;
-    
+
+    public Material hitMaterial;
+
+    public PlayerScript player;
     
     // Start is called before the first frame update
     void Start()
@@ -38,6 +41,7 @@ public class BeatUnitScript : MonoBehaviour
     public void onPlayerHit()
     {
         
+        Destroy(gameObject);
     }
 
     public void onDespawn()

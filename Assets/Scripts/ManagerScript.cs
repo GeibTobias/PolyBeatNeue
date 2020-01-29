@@ -120,6 +120,8 @@ public class ManagerScript : MonoBehaviour
             1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
             2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
         };
+
+        SongTiming.started = true;
     }
 
     // Update is called once per frame
@@ -232,7 +234,7 @@ public class ManagerScript : MonoBehaviour
             primIManager.rotate = rotate;
             secIManager.rotate = rotate;
     */
-            // updateManager();
+            updateManager();
             synctimer = Mathf.Min(synctimer + Time.deltaTime, 2.0f);
             // started = primIterator >= primBeats.Length && secIterator >= secBeats.Length;
         }
@@ -266,21 +268,16 @@ public class ManagerScript : MonoBehaviour
         //secIManager.updateManager(bpm, polySecondary);
         // }
 
-        /*
+        
         bool hasCollision = false;
         foreach (GameObject s in slitList)
         {
             SlitScript slitScript = s.GetComponent<SlitScript>();
-            if (!isTutorial & slitScript.checkCollision())
+//            if (!isTutorial & slitScript.checkCollision())
+            if (slitScript.checkCollision())
             {
                 hasCollision = true;
-                if (musicIsPlaying)
-                {
-                    Debug.Log("Pause");
-                    currentMusic.Pause();
-                    musicIsPlaying = false;
-                }
-
+                
                 if (slitScript.isPrime)
                 {
                     if (!hasVibrated)
@@ -288,6 +285,7 @@ public class ManagerScript : MonoBehaviour
                         OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.RTouch);
                         hasVibrated = true;
                     }
+                    
                 }
                 else
                 {
@@ -299,7 +297,7 @@ public class ManagerScript : MonoBehaviour
                 }
             }
         }
-
+/*
         if (!hasCollision)
         {
             if (!musicIsPlaying)
@@ -331,6 +329,7 @@ public static class SongTiming
 
     public static float secPerBeat = 60f / bpm;
 
+    public static bool started;
 
     public static float getSongPosition()
     {
@@ -340,5 +339,10 @@ public static class SongTiming
     public static float getSongPositionInBeats()
     {
         return ((float) AudioSettings.dspTime - dspSongTime) / secPerBeat;
+    }
+
+    public static bool hasStarted()
+    {
+        return started;
     }
 }

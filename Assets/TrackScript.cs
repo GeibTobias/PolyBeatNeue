@@ -1,21 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 
-public class PlayerScript : MonoBehaviour
+public class TrackScript : MonoBehaviour
 {
+    public float trackLength;
 
-    public float position;
+    public float enemy_pos;
 
-    public float speed;
-    public float minSpeed;
+
     public Transform startPoint;
+
     public Transform endPoint;
     
     // Start is called before the first frame update
     void Start()
     {
-        //currentHealth = maxHealth;
+        trackLength = 100;
+        enemy_pos = 0;
     }
 
     // Update is called once per frame
@@ -23,9 +26,9 @@ public class PlayerScript : MonoBehaviour
     {
         if (SongTiming.hasStarted())
         {
-            speed = Mathf.Max(minSpeed, speed);
-            position += speed;
-            transform.position = Vector3.Lerp(startPoint.position, endPoint.position, position/100);
+            enemy_pos += Time.deltaTime;
         }
+
+        transform.position = Vector3.Lerp(startPoint.position, endPoint.position, enemy_pos/100);
     }
 }
