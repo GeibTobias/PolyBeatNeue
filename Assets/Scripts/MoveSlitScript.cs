@@ -39,9 +39,18 @@ public class MoveSlitScript : MonoBehaviour
         {
             dist = Mathf.Abs(hpos - minz) / Mathf.Abs(minz - maxz);
         }
+
         
+        if (SongTiming.hasStarted())
+        {
+            transform.localPosition= new Vector3(transform.localPosition.x,transform.localPosition.y,dist);
+            
+        }
+        else if (hpos > minz)
+        {
+            SongTiming.started = true;
+        }
         //float adjustZpos = calcPos(contCube.transform.localPosition);
-        transform.localPosition= new Vector3(transform.localPosition.x,transform.localPosition.y,dist);
     }
 
     

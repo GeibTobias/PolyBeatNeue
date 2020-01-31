@@ -38,9 +38,9 @@ public class SlitScript : MonoBehaviour
     public bool checkCollision()
     {
         RaycastHit hit;
-        Vector3 offset = new Vector3(0, 0, transform.localScale.z / 2);
+        Vector3 offset = new Vector3(0, 0, transform.localScale.z);
         Vector3 yAdjust = new Vector3(0,transform.localScale.y /2,0);
-        if (Physics.Raycast(transform.position + yAdjust - offset, Vector3.forward, out hit, transform.localScale.z
+        if (Physics.Raycast(transform.position + yAdjust - offset, Vector3.forward, out hit, transform.localScale.z*1.3f
                 , layer))
         {
             hit.transform.gameObject.GetComponent<BeatUnitScript>().onPlayerHit();
