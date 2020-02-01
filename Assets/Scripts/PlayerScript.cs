@@ -20,7 +20,7 @@ public class PlayerScript : MonoBehaviour
     {
         //currentHealth = maxHealth;
         minSpeed = 100;
-        maxSpeed = 1000;
+        maxSpeed = 9999;
     }
 
     // Update is called once per frame

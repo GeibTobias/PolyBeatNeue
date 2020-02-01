@@ -16,6 +16,7 @@ public class BeatUnitScript : MonoBehaviour
 
     public PlayerScript player;
 
+    //public AudioSource desSound;
     
     // Start is called before the first frame update
     void Start()
@@ -41,7 +42,16 @@ public class BeatUnitScript : MonoBehaviour
 
     public void onPlayerHit()
     {
+        //desSound.Play();
+        Debug.Log("Destroy" + SongTiming.getSongPositionInBeats());
         player.speed += 100;
+        /*
+        while (desSound.isPlaying)
+        {
+            yield return null;
+        }
+        */
+//        gameObject.SetActive(false);
         Destroy(gameObject);
     }
 

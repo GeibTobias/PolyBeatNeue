@@ -21,6 +21,8 @@ public class SlitScript : MonoBehaviour
     public Material tutorialMaterial;
 
     public bool tutorial;
+
+    public AudioSource desSound;
     
     // Start is called before the first frame update
     void Start()
@@ -43,7 +45,11 @@ public class SlitScript : MonoBehaviour
         if (Physics.Raycast(transform.position + yAdjust - offset, Vector3.forward, out hit, transform.localScale.z*1.3f
                 , layer))
         {
+            ParticleSystem ps = GetComponentInChildren<ParticleSystem>();
             hit.transform.gameObject.GetComponent<BeatUnitScript>().onPlayerHit();
+            ps.transform.position = hit.transform.position;
+            ps.Play();
+            desSound.Play();
 //            Debug.Log(hit.transform.parent.gameObject);
             return true;
         }

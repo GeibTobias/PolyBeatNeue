@@ -58,7 +58,7 @@ public class HighscoreScript : MonoBehaviour
         totalScore = player.displaySpeed;
         displayScore = Mathf.FloorToInt(totalScore);
         string scoreoffset = "";
-        displayScore = Mathf.Max(0,Mathf.Min(displayScore, 1000));
+        displayScore = Mathf.Max(0,Mathf.Min(displayScore, 9999));
         if (displayScore < 10)
         {
             scoreoffset = "000";
@@ -70,14 +70,14 @@ public class HighscoreScript : MonoBehaviour
             scoreoffset = "0";
         }
 
-        primlight.intensity = displayScore / 100;
+        primlight.intensity = displayScore / 1000;
         secLight.intensity = primlight.intensity;
        thisText.text = scoreoffset + displayScore;
     }
 
     public void onFinished()
     {
-        float ds = Mathf.FloorToInt(internalScore / 1000);
+        float ds = Mathf.FloorToInt(internalScore / 10000);
         //float ds = internalScore;
         finalText.text = "GAME OVER \n Highscore: \n" + ds;
     }

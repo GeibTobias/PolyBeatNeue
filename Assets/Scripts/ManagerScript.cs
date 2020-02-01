@@ -115,7 +115,9 @@ public class ManagerScript : MonoBehaviour
 
         primBeats = new float[]
         {
-            //4, 12, 20, 24,
+            //4, 12, 20, 24,28,32,33,34,35,36,37,38,39,40,41,42,43,44
+
+            
             4, 8, 12, 16, 20, 24, 28, 32, 34, 36, 40, 44, 48, 52, 56, 60, 64, 66, 68, 71, 72, 75, 76, 79.5f, 80.5f,
             81.5f, 82.5f, 84, 87, 88, 91, 94.5f,
             95.5f, 96.5f, 97.5f, 100, 103, 104, 107, 110.5f, 111.5f, 112.5f, 113.5f, 116, 119, 120, 123, 126.5f, 127.5f,
@@ -265,13 +267,14 @@ public class ManagerScript : MonoBehaviour
             689.0f, 
             690.5f, 
             
-            
+           
             //79.5f, 80.5f, 81.5f, 82.5f, 87.5f, 90.5f, // 1, 2, 2,
             //3, 0.5f, 1, 1, 1, 5, 3, 0.5f, 1, 1, 1, 5, 3, 1, 2, 2, 3, 0.5f, 1, 1, 1, 5,
         };
         secBeats = new float[]
         {
-            //  4, 12, 20, 24,
+         //   4, 12, 20, 24,28,32,33,34,35,36,37,38,39,40,41,42,43,44
+
 
             4, 8, 12, 16, 20, 24, 28, 32, 34, 37, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 67, 69, 91, 97,
             99, 101,
@@ -672,7 +675,7 @@ public static class SongTiming
 
     public static float secPerBeat = 60f / bpm;
 
-    public static bool started;
+    public static bool started  =true;
 
     public static float getSongPosition()
     {
