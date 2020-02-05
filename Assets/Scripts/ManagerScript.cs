@@ -675,7 +675,7 @@ public static class SongTiming
 
     public static float secPerBeat = 60f / bpm;
 
-    public static bool started  =true;
+    public static bool started;
 
     public static float getSongPosition()
     {
